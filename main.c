@@ -26,6 +26,7 @@ void calcularIdade() {
   printf("Ano: /");
   scanf("%d", &ano);
 
+  //---condições para validação da idade digitada
   if ((dia < 1 || dia > 31) || (mes < 1) || (mes > 12) || (ano > 2021)) {
     printf("\n Data invalida digite novamente");
     Sleep(1000);
@@ -40,6 +41,7 @@ void calcularIdade() {
     Sleep(1000);
     calcularIdade();
   }
+  //---FIM : condições para validação da idade digitada
 
   idade = 2021 - ano;
   if ((dia <= 23 && mes <= 11) || mes < 11) {
@@ -54,6 +56,48 @@ void calcularIdade() {
   submenu(&calcularIdade);
 }
 
+void calculaJuros() {
+  float valorEmprestimo;
+  float juros;
+  float qtdDiasJuros;
+  float emprestimoFloat;
+  int qtdMes;
+  int qtdDias;
+  char atrasado;
+  system("cls||clear");
+  printf("|[2] - Q2: Calcular juros emprestimo!     |\n");
+  printf("\nQuantidade de dias para pagamento?");
+  scanf("%d", &qtdDias);
+
+  if (qtdDias < 1) {
+    system("cls || clear");
+    printf("\nDias precisa ser maior que zero '0', digite novamente");
+    Sleep(2000);
+    calculaJuros();
+  }
+  printf("\nValor emprestimo de 800 , pagamento para %d dias", qtdDias);
+
+  if (qtdDias <= 30) {
+    emprestimoFloat = 800 + (800 * 0.06);
+  } else if (qtdDias <= 60) {
+    emprestimoFloat = 800 + (800 * 0.10);
+  } else if (qtdDias <= 90) {
+    emprestimoFloat = 800 + (800 * 0.13);
+  } else {
+    qtdMes = qtdDias / 30;
+    if (qtdDias % 30 != 0) {
+      qtdMes++;
+    }
+    juros = pow(1.04, qtdMes);
+    printf("\nJUROS: %f", juros);
+
+    emprestimoFloat = 800 * juros;
+  }
+  printf("\nValor emprestimo acrescido dos juros:|%.2f|", emprestimoFloat);
+
+  submenu(&calculaJuros);
+}
+
 int main() {
 
   // abertura();
@@ -66,7 +110,7 @@ int main() {
       calcularIdade();
       break;
     case 2:
-      // calcular juros;
+      calculaJuros();
       break;
     case 3:
       // calcular coroa circular;
