@@ -61,7 +61,6 @@ void calcularIdade() {
   } else if (ano == anoAtual) {
     printf("Ainda nao nasceu!", idade);
   } else {
-
     printf("Idade =|%d| ano(s)", idade - 1);
   }
 
@@ -131,11 +130,10 @@ calcularCoroa() {
 
 int main() {
 
-  // printf("\nData: %d/%d/%d/\n", dia, mes, ano);
-  // abertura();
+  abertura();
   do {
 
-    // menu();
+    menu();
 
     switch (_INDICE) {
     case 1:
