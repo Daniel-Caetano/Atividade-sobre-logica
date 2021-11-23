@@ -2,13 +2,14 @@
 // Data: 23/11/2021
 // Atividade feita como base para primeira prova do protocolo bicicleta de
 // rodinhas
+
 #include "menu.c"
 #include "menu.h"
 #include <Windows.h>
 #include <math.h>
 #include <stdio.h>
 
-extern int _INDICE = 2;
+extern int _INDICE = 10;
 
 void calcularIdade() {
   int dia;
@@ -98,12 +99,31 @@ void calculaJuros() {
   submenu(&calculaJuros);
 }
 
+calcularCoroa() {
+  int coroaMaior;
+  int coroaMenor;
+  float coroaCircular;
+
+  system("cls || clear");
+  printf("|[3] - Q3: Calcular a coroa circular      |\n");
+  printf("\nDigite o Raio da coroa maior(R1)!\n");
+  scanf(" %d", &coroaMaior);
+  printf("\nDigite o Raio da coroa menor (R2)!\n");
+  scanf(" %d", &coroaMenor);
+
+  coroaCircular =
+      (float)(3.1415926 * (pow(coroaMaior, 2) - pow(coroaMenor, 2)));
+  printf("\nRaio da Coroa:|%f|", coroaCircular);
+
+  submenu(&calcularCoroa);
+}
+
 int main() {
 
-  // abertura();
+  abertura();
   do {
 
-    // menu();
+    menu();
 
     switch (_INDICE) {
     case 1:
@@ -113,13 +133,12 @@ int main() {
       calculaJuros();
       break;
     case 3:
-      // calcular coroa circular;
+      calcularCoroa();
       break;
     case 4:
       printf("\nObrigado por utilizar nosso sistema!\n");
       _INDICE = 0;
       break;
-
     default:
       printf("Comando invalido!");
       Sleep(2000);
