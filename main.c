@@ -9,14 +9,25 @@
 #include <math.h>
 #include <stdio.h>
 
-extern int _INDICE = 10;
+extern int _INDICE = 1;
+void dataAtual(int *dia, int *mes, int *ano) {
+  time_t mytime;
+  mytime = time(NULL);
+  struct tm data = *localtime(&mytime);
+
+  (*dia) = data.tm_mday;
+  (*mes) = data.tm_mon + 1;
+  (*ano) = data.tm_year + 1900;
+  // printf("Data: %d/%d/%d/\n", (*dia), (*mes), (*ano));
+}
 
 void calcularIdade() {
+  int diaAtual, mesAtual, anoAtual;
   int dia;
   int mes;
   int ano;
   int idade;
-
+  dataAtual(&diaAtual, &mesAtual, &anoAtual);
   system("cls||clear");
   printf("\n|[1] - Q1: calcular a idade de uma pessoa!|");
   printf("\nDigite a data de nascimento!\n");
@@ -28,7 +39,7 @@ void calcularIdade() {
   scanf("%d", &ano);
 
   //---condições para validação da idade digitada
-  if ((dia < 1 || dia > 31) || (mes < 1) || (mes > 12) || (ano > 2021)) {
+  if ((dia < 1 || dia > 31) || (mes < 1) || (mes > 12) || (ano > anoAtual)) {
     printf("\n Data invalida digite novamente");
     Sleep(1000);
     calcularIdade();
@@ -44,10 +55,10 @@ void calcularIdade() {
   }
   //---FIM : condições para validação da idade digitada
 
-  idade = 2021 - ano;
-  if ((dia <= 23 && mes <= 11) || mes < 11) {
+  idade = anoAtual - ano;
+  if ((dia <= diaAtual && mes <= mesAtual) || mes < mesAtual) {
     printf("Idade =|%d|ano(s)", idade);
-  } else if (ano == 2021) {
+  } else if (ano == anoAtual) {
     printf("Ainda nao nasceu!", idade);
   } else {
 
@@ -90,7 +101,7 @@ void calculaJuros() {
       qtdMes++;
     }
     juros = pow(1.04, qtdMes);
-    printf("\nJUROS: %f", juros);
+    // printf("\nJUROS: %f", juros);
 
     emprestimoFloat = 800 * juros;
   }
@@ -100,16 +111,16 @@ void calculaJuros() {
 }
 
 calcularCoroa() {
-  int coroaMaior;
-  int coroaMenor;
+  float coroaMaior;
+  float coroaMenor;
   float coroaCircular;
 
   system("cls || clear");
   printf("|[3] - Q3: Calcular a coroa circular      |\n");
   printf("\nDigite o Raio da coroa maior(R1)!\n");
-  scanf(" %d", &coroaMaior);
+  scanf(" %f", &coroaMaior);
   printf("\nDigite o Raio da coroa menor (R2)!\n");
-  scanf(" %d", &coroaMenor);
+  scanf(" %f", &coroaMenor);
 
   coroaCircular =
       (float)(3.1415926 * (pow(coroaMaior, 2) - pow(coroaMenor, 2)));
@@ -120,10 +131,11 @@ calcularCoroa() {
 
 int main() {
 
-  abertura();
+  // printf("\nData: %d/%d/%d/\n", dia, mes, ano);
+  // abertura();
   do {
 
-    menu();
+    // menu();
 
     switch (_INDICE) {
     case 1:
